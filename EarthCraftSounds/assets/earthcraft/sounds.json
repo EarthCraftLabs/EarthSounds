@@ -1,0 +1,11 @@
+{
+  "soundkey": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "earthcraft:ambient/soundkey",
+        "stream": true
+      }
+    ]
+  }
+}
