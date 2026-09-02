@@ -14,7 +14,13 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("com.google.code.gson:gson:2.11.0")
+    implementation("com.zaxxer:HikariCP:6.2.0")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.2")
+
     implementation(kotlin("stdlib"))
+    testImplementation(kotlin("test"))
+    testImplementation("com.google.code.gson:gson:2.11.0")
 }
 
 kotlin {
@@ -22,6 +28,10 @@ kotlin {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+
     processResources {
         val props = mapOf(
             "version" to version,
@@ -42,6 +52,8 @@ tasks {
         // Wichtig bei Kotlin-Plugins: Verschiebt die Kotlin Runtime in dein Package,
         // damit es keine ClassLoader-Konflikte mit anderen Kotlin-Plugins gibt.
         relocate("kotlin", "de.mecrytv.earthsounds.libs.kotlin")
+        relocate("com.zaxxer.hikari", "com.example.plugin.libs.hikari")
+        relocate("org.mariadb.jdbc", "com.example.plugin.libs.mariadb")
     }
 
     jar {
