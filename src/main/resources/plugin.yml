@@ -1,9 +1,9 @@
 name: EarthSounds
 description: $description
 version: '${version}'
-
 main: de.mecrytv.earthSounds.EarthSounds
 api-version: '1.21.11'
-
 authors: [ MecryTv, EarthCraft ]
 website: https://earthcraft.live/
+depend:
+  - EarthCore

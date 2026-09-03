@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.3.21"
     id("xyz.jpenilla.run-paper") version "2.3.1"
-    id("com.gradleup.shadow") version "8.3.5"
+    id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "de.mecrytv"
@@ -9,18 +9,15 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    compileOnly("com.google.code.gson:gson:2.11.0")
-    implementation("com.zaxxer:HikariCP:6.2.0")
-    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.2")
+    compileOnly("de.mecrytv:earthcore:1.6.0")
 
-    implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
-    testImplementation("com.google.code.gson:gson:2.11.0")
 }
 
 kotlin {
@@ -48,12 +45,6 @@ tasks {
         archiveBaseName.set("EarthSounds")
         archiveClassifier.set("")
         archiveVersion.set("")
-
-        // Wichtig bei Kotlin-Plugins: Verschiebt die Kotlin Runtime in dein Package,
-        // damit es keine ClassLoader-Konflikte mit anderen Kotlin-Plugins gibt.
-        relocate("kotlin", "de.mecrytv.earthsounds.libs.kotlin")
-        relocate("com.zaxxer.hikari", "com.example.plugin.libs.hikari")
-        relocate("org.mariadb.jdbc", "com.example.plugin.libs.mariadb")
     }
 
     jar {
@@ -65,7 +56,7 @@ tasks {
     }
 
     runServer {
-        minecraftVersion("1.21.1")
+        minecraftVersion("1.21.11")
         jvmArgs("-Xms2G", "-Xmx2G")
     }
 }
